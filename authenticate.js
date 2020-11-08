@@ -15,6 +15,15 @@ exports.getToken = function(user) {
     return jwt.sign(user, config.secretKey,
         {expiresIn: 3600});
 };
+exports.verifyAdmin = function (req,res,next) {
+       if (req.user.admin == true){
+           next();
+       }
+       else {
+           next(err);
+       }
+
+} 
 
 var opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
